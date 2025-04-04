@@ -18,14 +18,24 @@ export default function TabLayout() {
         headerShown: false,
         tabBarButton: HapticTab,
         tabBarBackground: TabBarBackground,
+        // Explicitly define animation and transition
+        animation: 'default',
+        animationDuration: 300,
+        // Prevent interpolator errors
         tabBarStyle: Platform.select({
           ios: {
             // Use a transparent background on iOS to show the blur effect
             position: 'absolute',
           },
-          default: {},
+          default: {
+            // Default style for other platforms
+          },
         }),
-      }}>
+        // Set default transition preset for compatibility
+        contentStyle: { backgroundColor: 'transparent' },
+      }}
+      backBehavior="initialRoute"
+    >
       <Tabs.Screen
         name="index"
         options={{
@@ -40,6 +50,8 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
         }}
       />
+      
+      {/* Removing cat-profile here as it's handled at the root level */}
     </Tabs>
   );
 }
